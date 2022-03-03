@@ -81,7 +81,6 @@ namespace _8086
             string r2;
             while (!InputRejestr("Pierwszy Rejestr", out r1)) { Console.WriteLine("Podano nieprawidłowe dane"); }
             while (!InputRejestr("Drugi Rejestr", out r2)) { Console.WriteLine("Podano nieprawidłowe dane"); }
-            Console.WriteLine(this);
             o(RejestrToInt(r1), RejestrToInt(r2));
         }
 
