@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31624.102
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "8086", "8086\8086.csproj", "{C933099E-F7BB-4D34-8143-F857078092EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "8086", "8086\8086.csproj", "{C933099E-F7BB-4D34-8143-F857078092EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intel8086", "Intel8086\Intel8086.csproj", "{364E9B5F-D497-4910-91F4-470409EA3C60}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{C933099E-F7BB-4D34-8143-F857078092EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C933099E-F7BB-4D34-8143-F857078092EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C933099E-F7BB-4D34-8143-F857078092EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{364E9B5F-D497-4910-91F4-470409EA3C60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{364E9B5F-D497-4910-91F4-470409EA3C60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{364E9B5F-D497-4910-91F4-470409EA3C60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{364E9B5F-D497-4910-91F4-470409EA3C60}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
