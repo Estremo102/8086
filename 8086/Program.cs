@@ -8,7 +8,15 @@ namespace _8086
         static void Main(string[] args)
         {
             Procesor procesor = new Procesor();
-            procesor.Operacja();
+            //procesor.Operacja();
+            bool succeed = false;
+            do
+            {
+                Console.Write(">");
+                succeed = procesor.ExecuteOperation(Console.ReadLine());
+                if (!succeed) Console.WriteLine("Wrong Command");
+            }
+            while (!succeed) ;
             Console.WriteLine(procesor);
         }
     }

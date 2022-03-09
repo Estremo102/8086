@@ -49,6 +49,36 @@ namespace Intel8086
             return false;
         }
 
+        static bool CheckRegister(string check)
+        {
+            if (check.Length != 2) return false;
+            if (((int)check[0] >= 65 && (int)check[0] <= 68) && (check[1] == 'H' || check[1] == 'L'))
+                return true;
+            return false;
+        }
+
+        public bool ExecuteOperation(string input)
+        {
+            string[] a;
+            a = input.ToUpper().Split(' ');
+            Operation o;
+            switch (a[0])
+            {
+                case "MOV":
+                    o = new Operation(MOV);
+                    break;
+                case "XCH":
+                    o = new Operation(XCH);
+                    break;
+                default:
+                    return false;
+            }
+            a = a[1].Split(',');
+            if(!CheckRegister(a[0]) || !CheckRegister(a[1])) return false;
+            o(RegisterToInt(a[0]), RegisterToInt(a[1]));
+            return true;
+        }
+
         public void Operacja()
         {
             Console.Write("Podaj rozkaz symulacji: ");
@@ -71,7 +101,7 @@ namespace Intel8086
             string r2;
             while (!InputRejestr("Pierwszy Rejestr", out r1)) { Console.WriteLine("Podano nieprawidłowe dane"); }
             while (!InputRejestr("Drugi Rejestr", out r2)) { Console.WriteLine("Podano nieprawidłowe dane"); }
-            o(RejestrToInt(r1), RejestrToInt(r2));
+            o(RegisterToInt(r1), RegisterToInt(r2));
         }
 
         void MOV(int a, int b) => rejestr[a] = rejestr[b];
@@ -82,7 +112,7 @@ namespace Intel8086
             rejestr[b] = temp;
         }
 
-        static int RejestrToInt(string r)
+        static int RegisterToInt(string r)
         {
             switch (r)
             {
