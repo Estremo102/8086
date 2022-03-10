@@ -18,9 +18,24 @@ namespace SymulatorIntel8086
 {
     public partial class MainWindow : Window
     {
+        Procesor proc;
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Insert_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                proc = new Procesor(AH.Text, AL.Text, BH.Text, BL.Text, CH.Text, CL.Text, DH.Text, DL.Text);
+                RegistersView.Text = "REJESTRY\n" + proc.ToString();
+            }
+            catch(ArgumentException)
+            {
+                proc = new Procesor();
+                RegistersView.Text = "PODANO BŁĘDNE DANE\n" + proc.ToString();
+            }
         }
     }
 }

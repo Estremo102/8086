@@ -9,7 +9,7 @@ namespace _8086
         {
             Procesor procesor = new Procesor();
             //procesor.Operacja();
-            bool succeed = false;
+            bool succeed;
             do
             {
                 Console.Write(">");

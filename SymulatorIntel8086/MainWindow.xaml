@@ -5,8 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SymulatorIntel8086"
         mc:Ignorable="d"
-        Title="Symulator Intel 8086" Height="450" Width="800">
+        Title="Symulator Intel 8086" Height="450" Width="800" Background="#FFF7E2C4">
     <Grid>
+        <Label Content="AH" HorizontalAlignment="Left" Margin="24,32,0,0" VerticalAlignment="Top" Height="25"/>
+        <Label Content="AL" HorizontalAlignment="Left" Margin="81,32,0,0" VerticalAlignment="Top" Height="25"/>
+        <Label Content="BH" HorizontalAlignment="Left" Margin="24,57,0,0" VerticalAlignment="Top" Height="25"/>
+        <Label Content="BL" HorizontalAlignment="Left" Margin="81,57,0,0" VerticalAlignment="Top" Height="25"/>
+        <Label Content="CH" HorizontalAlignment="Left" Margin="24,82,0,0" VerticalAlignment="Top" Height="25"/>
+        <Label Content="CL" HorizontalAlignment="Left" Margin="81,82,0,0" VerticalAlignment="Top" Height="25"/>
+        <Label Content="DH" HorizontalAlignment="Left" Margin="24,107,0,0" VerticalAlignment="Top" Height="25"/>
+        <Label Content="DL" HorizontalAlignment="Left" Margin="81,107,0,0" VerticalAlignment="Top" Height="25"/>
+        <TextBox x:Name="AH" HorizontalAlignment="Left" Margin="50,36,0,0" Text="00" TextWrapping="Wrap" VerticalAlignment="Top" Width="23" Height="21"/>
+        <TextBox x:Name="AL" HorizontalAlignment="Left" Margin="104,36,0,0" Text="00" TextWrapping="Wrap" VerticalAlignment="Top" Width="23" Height="21"/>
+        <TextBox x:Name="BH" HorizontalAlignment="Left" Margin="50,60,0,0" Text="00" TextWrapping="Wrap" VerticalAlignment="Top" Width="23" Height="21"/>
+        <TextBox x:Name="BL" HorizontalAlignment="Left" Margin="104,60,0,0" Text="00" TextWrapping="Wrap" VerticalAlignment="Top" Width="23" Height="21"/>
+        <TextBox x:Name="CH" HorizontalAlignment="Left" Margin="50,87,0,0" Text="00" TextWrapping="Wrap" VerticalAlignment="Top" Width="23" Height="21"/>
+        <TextBox x:Name="CL" HorizontalAlignment="Left" Margin="104,87,0,0" Text="00" TextWrapping="Wrap" VerticalAlignment="Top" Width="23" Height="21"/>
+        <TextBox x:Name="DH" HorizontalAlignment="Left" Margin="50,112,0,0" Text="00" TextWrapping="Wrap" VerticalAlignment="Top" Width="23" Height="21"/>
+        <TextBox x:Name="DL" HorizontalAlignment="Left" Margin="104,112,0,0" Text="00" TextWrapping="Wrap" VerticalAlignment="Top" Width="23" Height="21"/>
+        <TextBlock x:Name="RegistersView" HorizontalAlignment="Left" Margin="202,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="86" Width="109"><Run Language="pl-pl" Text="REJESTRY"/><LineBreak/><Run Text="AH[00] AL[00]"/><LineBreak/><Run Language="pl-pl" Text="BH[00] BL[00]"/><LineBreak/><Run Language="pl-pl" Text="CH[00] CL[00]"/><LineBreak/><Run Language="pl-pl" Text="DH[00] DL[00]"/></TextBlock>
+        <Button x:Name="Insert" Content="Wczytaj" HorizontalAlignment="Left" Margin="50,138,0,0" VerticalAlignment="Top" Width="77" Click="Insert_Click"/>
 
     </Grid>
 </Window>

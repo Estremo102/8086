@@ -4,37 +4,42 @@ namespace Intel8086
 {
     public class Procesor
     {
-        private string[] register = new string[8];
-        public string AH { get => register[0]; private set => register[0] = value; }
-        public string AL { get => register[1]; private set => register[0] = value; }
-        public string BH { get => register[2]; private set => register[0] = value; }
-        public string BL { get => register[3]; private set => register[0] = value; }
-        public string CH { get => register[4]; private set => register[0] = value; }
-        public string CL { get => register[5]; private set => register[0] = value; }
-        public string DH { get => register[6]; private set => register[0] = value; }
-        public string DL { get => register[7]; private set => register[0] = value; }
+        private int[] register = new int[8];
+        public string AH { get => ToHex(register[0]); private set => register[0] = ToDecimal(value); }
+        public string AL { get => ToHex(register[1]); private set => register[1] = ToDecimal(value); }
+        public string BH { get => ToHex(register[2]); private set => register[2] = ToDecimal(value); }
+        public string BL { get => ToHex(register[3]); private set => register[3] = ToDecimal(value); }
+        public string CH { get => ToHex(register[4]); private set => register[4] = ToDecimal(value); }
+        public string CL { get => ToHex(register[5]); private set => register[5] = ToDecimal(value); }
+        public string DH { get => ToHex(register[6]); private set => register[6] = ToDecimal(value); }
+        public string DL { get => ToHex(register[7]); private set => register[7] = ToDecimal(value); }
 
         delegate void Operation(int a, int b);
 
+        //public Procesor()
+        //{
+        //    string ah, al, bh, bl, ch, cl, dh, dl;
+        //    while (!InputData("AH", out ah)) { Console.WriteLine("Wrong data"); }
+        //    while (!InputData("AL", out al)) { Console.WriteLine("Wrong data"); }
+        //    while (!InputData("BH", out bh)) { Console.WriteLine("Wrong data"); }
+        //    while (!InputData("BL", out bl)) { Console.WriteLine("Wrong data"); }
+        //    while (!InputData("CH", out ch)) { Console.WriteLine("Wrong data"); }
+        //    while (!InputData("CL", out cl)) { Console.WriteLine("Wrong data"); }
+        //    while (!InputData("DH", out dh)) { Console.WriteLine("Wrong data"); }
+        //    while (!InputData("DL", out dl)) { Console.WriteLine("Wrong data"); }
+        //    AH = ah;
+        //    AL = al;
+        //    BH = bh;
+        //    BL = bl;
+        //    CH = ch;
+        //    CL = cl;
+        //    DH = dh;
+        //    DL = dl;
+        //}
+
         public Procesor()
         {
-            string ah, al, bh, bl, ch, cl, dh, dl;
-            while (!InputData("AH", out ah)) { Console.WriteLine("Wrong data"); }
-            while (!InputData("AL", out al)) { Console.WriteLine("Wrong data"); }
-            while (!InputData("BH", out bh)) { Console.WriteLine("Wrong data"); }
-            while (!InputData("BL", out bl)) { Console.WriteLine("Wrong data"); }
-            while (!InputData("CH", out ch)) { Console.WriteLine("Wrong data"); }
-            while (!InputData("CL", out cl)) { Console.WriteLine("Wrong data"); }
-            while (!InputData("DH", out dh)) { Console.WriteLine("Wrong data"); }
-            while (!InputData("DL", out dl)) { Console.WriteLine("Wrong data"); }
-            register[0] = ah;
-            register[1] = al;
-            register[2] = bh;
-            register[3] = bl;
-            register[4] = ch;
-            register[5] = cl;
-            register[6] = dh;
-            register[7] = dl;
+
         }
 
         public Procesor(params string[] registers)
@@ -50,6 +55,9 @@ namespace Intel8086
             DH = registers[6];
             DL = registers[7];
         }
+
+        public static string ToHex(int x) => Convert.ToString(x, 16).ToUpper();
+        public static int ToDecimal(string x) => Convert.ToInt32(x, 16);
 
         bool InputData(string whatIsInput, out string a)
         {
@@ -83,7 +91,7 @@ namespace Intel8086
         static bool CheckRegister(string check)
         {
             if (check.Length != 2) return false;
-            if (((int)check[0] >= 65 && (int)check[0] <= 68) && (check[1] == 'H' || check[1] == 'L'))
+            if (check[0] >= 65 && check[0] <= 68 && (check[1] == 'H' || check[1] == 'L'))
                 return true;
             return false;
         }
@@ -138,7 +146,7 @@ namespace Intel8086
         void MOV(int a, int b) => register[a] = register[b];
         void XCH(int a, int b)
         {
-            string temp = register[a];
+            int temp = register[a];
             register[a] = register[b];
             register[b] = temp;
         }
@@ -159,9 +167,9 @@ namespace Intel8086
             }
         }
 
-        public override string ToString() => $"AX: AH[{register[0]}] AL[{register[1]}]\n" +
-                                             $"BX: BH[{register[2]}] BL[{register[3]}]\n" +
-                                             $"CX: CH[{register[4]}] CL[{register[5]}]\n" +
-                                             $"DX: DH[{register[6]}] DL[{register[7]}]";
+        public override string ToString() => $"AX: AH[{AH}] AL[{AL}]\n" +
+                                             $"BX: BH[{BH}] BL[{BL}]\n" +
+                                             $"CX: CH[{CH}] CL[{CL}]\n" +
+                                             $"DX: DH[{DH}] DL[{DL}]";
     }
 }
