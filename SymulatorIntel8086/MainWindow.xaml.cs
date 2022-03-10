@@ -34,7 +34,7 @@ namespace SymulatorIntel8086
             catch(ArgumentException)
             {
                 proc = new Procesor();
-                RegistersView.Text = "PODANO BŁĘDNE DANE\n" + proc.ToString();
+                RegistersView.Text = "BŁĘDNE DANE\n" + proc.ToString();
             }
         }
     }

@@ -45,7 +45,7 @@ namespace Intel8086
         public Procesor(params string[] registers)
         {
             if (registers.Length != 8) throw new ArgumentException();
-            foreach (var register in registers) if (CheckData(register)) throw new ArgumentException();
+            foreach (var register in registers) if (!CheckData(register)) throw new ArgumentException();
             AH = registers[0];
             AL = registers[1];
             BH = registers[2];
@@ -56,7 +56,11 @@ namespace Intel8086
             DL = registers[7];
         }
 
-        public static string ToHex(int x) => Convert.ToString(x, 16).ToUpper();
+        public static string ToHex(int x)
+        {
+            if (x < 16) return "0" + Convert.ToString(x, 16).ToUpper();
+            return Convert.ToString(x, 16).ToUpper();
+        }
         public static int ToDecimal(string x) => Convert.ToInt32(x, 16);
 
         bool InputData(string whatIsInput, out string a)
@@ -167,9 +171,9 @@ namespace Intel8086
             }
         }
 
-        public override string ToString() => $"AX: AH[{AH}] AL[{AL}]\n" +
-                                             $"BX: BH[{BH}] BL[{BL}]\n" +
-                                             $"CX: CH[{CH}] CL[{CL}]\n" +
-                                             $"DX: DH[{DH}] DL[{DL}]";
+        public override string ToString() => $"AX: AH[{AH,2}] AL[{AL,2}]\n" +
+                                             $"BX: BH[{BH,2}] BL[{BL,2}]\n" +
+                                             $"CX: CH[{CH,2}] CL[{CL,2}]\n" +
+                                             $"DX: DH[{DH,2}] DL[{DL,2}]";
     }
 }
