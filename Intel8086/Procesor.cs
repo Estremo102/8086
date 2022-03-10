@@ -110,8 +110,8 @@ namespace Intel8086
                 case "MOV":
                     o = new Operation(MOV);
                     break;
-                case "XCH":
-                    o = new Operation(XCH);
+                case "XCHG":
+                    o = new Operation(XCHG);
                     break;
                 default:
                     return false;
@@ -132,8 +132,8 @@ namespace Intel8086
                 case "MOV":
                     o = new Operation(MOV);
                     break;
-                case "XCH":
-                    o = new Operation(XCH);
+                case "XCHG":
+                    o = new Operation(XCHG);
                     break;
                 default:
                     Console.WriteLine("Podano nieprawidłowe dane");
@@ -148,7 +148,7 @@ namespace Intel8086
         }
 
         void MOV(int a, int b) => register[a] = register[b];
-        void XCH(int a, int b)
+        void XCHG(int a, int b)
         {
             int temp = register[a];
             register[a] = register[b];
