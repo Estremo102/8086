@@ -7,24 +7,24 @@
         mc:Ignorable="d"
         Title="Symulator Intel 8086" Height="450" Width="800" Background="#FFF7E2C4">
     <Grid>
-        <Label Content="AH" HorizontalAlignment="Left" Margin="24,32,0,0" VerticalAlignment="Top" Height="25"/>
-        <Label Content="AL" HorizontalAlignment="Left" Margin="81,32,0,0" VerticalAlignment="Top" Height="25"/>
-        <Label Content="BH" HorizontalAlignment="Left" Margin="24,57,0,0" VerticalAlignment="Top" Height="25"/>
-        <Label Content="BL" HorizontalAlignment="Left" Margin="81,57,0,0" VerticalAlignment="Top" Height="25"/>
-        <Label Content="CH" HorizontalAlignment="Left" Margin="24,82,0,0" VerticalAlignment="Top" Height="25"/>
-        <Label Content="CL" HorizontalAlignment="Left" Margin="81,82,0,0" VerticalAlignment="Top" Height="25"/>
-        <Label Content="DH" HorizontalAlignment="Left" Margin="24,107,0,0" VerticalAlignment="Top" Height="25"/>
-        <Label Content="DL" HorizontalAlignment="Left" Margin="81,107,0,0" VerticalAlignment="Top" Height="25"/>
-        <TextBox x:Name="AH" HorizontalAlignment="Left" Margin="50,36,0,0" Text="00" TextWrapping="Wrap" VerticalAlignment="Top" Width="23" Height="21"/>
-        <TextBox x:Name="AL" HorizontalAlignment="Left" Margin="104,36,0,0" Text="00" TextWrapping="Wrap" VerticalAlignment="Top" Width="23" Height="21"/>
-        <TextBox x:Name="BH" HorizontalAlignment="Left" Margin="50,60,0,0" Text="00" TextWrapping="Wrap" VerticalAlignment="Top" Width="23" Height="21"/>
-        <TextBox x:Name="BL" HorizontalAlignment="Left" Margin="104,60,0,0" Text="00" TextWrapping="Wrap" VerticalAlignment="Top" Width="23" Height="21"/>
-        <TextBox x:Name="CH" HorizontalAlignment="Left" Margin="50,87,0,0" Text="00" TextWrapping="Wrap" VerticalAlignment="Top" Width="23" Height="21"/>
-        <TextBox x:Name="CL" HorizontalAlignment="Left" Margin="104,87,0,0" Text="00" TextWrapping="Wrap" VerticalAlignment="Top" Width="23" Height="21"/>
-        <TextBox x:Name="DH" HorizontalAlignment="Left" Margin="50,112,0,0" Text="00" TextWrapping="Wrap" VerticalAlignment="Top" Width="23" Height="21"/>
-        <TextBox x:Name="DL" HorizontalAlignment="Left" Margin="104,112,0,0" Text="00" TextWrapping="Wrap" VerticalAlignment="Top" Width="23" Height="21"/>
+        <Label Content="AH" HorizontalAlignment="Left" Margin="24,32,0,0" VerticalAlignment="Top" Height="27" Width="33" FontFamily="Lucida Console" FontSize="18"/>
+        <Label Content="AL" HorizontalAlignment="Left" Margin="95,32,0,0" VerticalAlignment="Top" Height="27" Width="29" FontFamily="Lucida Console" FontSize="18"/>
+        <Label Content="BH" HorizontalAlignment="Left" Margin="24,59,0,0" VerticalAlignment="Top" Height="27" Width="31" FontFamily="Lucida Console" FontSize="18"/>
+        <Label Content="BL" HorizontalAlignment="Left" Margin="95,59,0,0" VerticalAlignment="Top" Height="27" Width="28" FontFamily="Lucida Console" FontSize="18"/>
+        <Label Content="CH" HorizontalAlignment="Left" Margin="24,86,0,0" VerticalAlignment="Top" Height="27" Width="32" FontFamily="Lucida Console" FontSize="18"/>
+        <Label Content="CL" HorizontalAlignment="Left" Margin="95,86,0,0" VerticalAlignment="Top" Height="27" Width="28" FontFamily="Lucida Console" FontSize="18"/>
+        <Label Content="DH" HorizontalAlignment="Left" Margin="24,113,0,0" VerticalAlignment="Top" Height="27" Width="33" FontFamily="Lucida Console" FontSize="18"/>
+        <Label Content="DL" HorizontalAlignment="Left" Margin="95,113,0,0" VerticalAlignment="Top" Height="27" Width="29" FontFamily="Lucida Console" FontSize="18"/>
+        <TextBox x:Name="AH" HorizontalAlignment="Left" Margin="56,34,0,0" Text="00" TextWrapping="Wrap" VerticalAlignment="Top" Width="31" Height="24" FontFamily="Lucida Console" FontSize="20" FontWeight="Normal" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="AL" HorizontalAlignment="Left" Margin="126,33,0,0" Text="00" TextWrapping="Wrap" VerticalAlignment="Top" Width="31" Height="24" FontFamily="Lucida Console" FontSize="20" FontWeight="Normal" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="BH" HorizontalAlignment="Left" Margin="56,61,0,0" Text="00" TextWrapping="Wrap" VerticalAlignment="Top" Width="31" Height="24" FontFamily="Lucida Console" FontSize="20" FontWeight="Normal" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="BL" HorizontalAlignment="Left" Margin="126,61,0,0" Text="00" TextWrapping="Wrap" VerticalAlignment="Top" Width="31" Height="24" FontFamily="Lucida Console" FontSize="20" FontWeight="Normal" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="CH" HorizontalAlignment="Left" Margin="56,89,0,0" Text="00" TextWrapping="Wrap" VerticalAlignment="Top" Width="31" Height="24" FontFamily="Lucida Console" FontSize="20" FontWeight="Normal" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="CL" HorizontalAlignment="Left" Margin="126,89,0,0" Text="00" TextWrapping="Wrap" VerticalAlignment="Top" Width="31" Height="24" FontFamily="Lucida Console" FontSize="20" FontWeight="Normal" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="DH" HorizontalAlignment="Left" Margin="56,117,0,0" Text="00" TextWrapping="Wrap" VerticalAlignment="Top" Width="31" Height="24" FontFamily="Lucida Console" FontSize="20" FontWeight="Normal" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="DL" HorizontalAlignment="Left" Margin="126,117,0,0" Text="00" TextWrapping="Wrap" VerticalAlignment="Top" Width="31" Height="24" FontFamily="Lucida Console" FontSize="20" FontWeight="Normal" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         <TextBlock x:Name="RegistersView" HorizontalAlignment="Left" Margin="164,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="138" Width="270" FontSize="24" FontFamily="Lucida Console" Background="#FFE6CBA5" Padding="10,10,10,10"><Run Text="REJESTRY"/><LineBreak/><Run Language="pl-pl" Text="AX: "/><Run Text="AH[00] AL[00]"/><LineBreak/><Run Language="pl-pl" Text="BX: "/><Run Text="BH[00] BL[00]"/><LineBreak/><Run Language="pl-pl" Text="CX: "/><Run Text="CH[00] CL[00]"/><LineBreak/><Run Language="pl-pl" Text="DX: "/><Run Text="DH[00] DL[00]"/></TextBlock>
-        <Button x:Name="Insert" Content="Wczytaj" HorizontalAlignment="Left" Margin="50,138,0,0" VerticalAlignment="Top" Width="77" Click="Insert_Click"/>
+        <Button x:Name="Insert" Content="Wczytaj" HorizontalAlignment="Left" Margin="56,146,0,0" VerticalAlignment="Top" Width="96" Click="Insert_Click" Height="22"/>
         <Label Content="Operacja" HorizontalAlignment="Left" Margin="24,186,0,0" VerticalAlignment="Top" Height="36" Width="111" FontFamily="Lucida Console" FontSize="18"/>
         <ComboBox x:Name="ChooseOperation" HorizontalAlignment="Left" Margin="24,217,0,0" VerticalAlignment="Top" Width="120"/>
         <Label Content="Rejestr 1" HorizontalAlignment="Left" Margin="155,186,0,0" VerticalAlignment="Top" Height="36" Width="111" FontFamily="Lucida Console" FontSize="18"/>
