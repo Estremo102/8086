@@ -7,7 +7,8 @@ namespace _8086
     {
         static void Main(string[] args)
         {
-            Procesor procesor = new Procesor();
+            Console.WriteLine("wersja konsolowa nieczynna w związku ze zmianami w bibiliotece");
+            //Procesor procesor = new Procesor();
             //procesor.Operacja();
 
             //public Procesor()
@@ -42,15 +43,54 @@ namespace _8086
             //    return false;
             //}
 
-            bool succeed;
-            do
-            {
-                Console.Write(">");
-                succeed = procesor.ExecuteOperation(Console.ReadLine());
-                if (!succeed) Console.WriteLine("Wrong Command");
-            }
-            while (!succeed) ;
-            Console.WriteLine(procesor);
+            //bool succeed;
+            //do
+            //{
+            //    Console.Write(">");
+            //    succeed = procesor.ExecuteOperation(Console.ReadLine());
+            //    if (!succeed) Console.WriteLine("Wrong Command");
+            //}
+            //while (!succeed) ;
+            //Console.WriteLine(procesor);
+
+
+
+            //public void Operacja()
+            //{
+            //    Console.Write("Podaj rozkaz symulacji: ");
+            //    string a = Console.ReadLine().ToUpper();
+            //    Operation o;
+            //    switch (a)
+            //    {
+            //        case "MOV":
+            //            o = new Operation(MOV);
+            //            break;
+            //        case "XCHG":
+            //            o = new Operation(XCHG);
+            //            break;
+            //        default:
+            //            Console.WriteLine("Podano nieprawidłowe dane");
+            //            Operacja();
+            //            return;
+            //    }
+            //    string r1;
+            //    string r2;
+            //    while (!InputRejestr("Pierwszy Rejestr", out r1)) { Console.WriteLine("Podano nieprawidłowe dane"); }
+            //    while (!InputRejestr("Drugi Rejestr", out r2)) { Console.WriteLine("Podano nieprawidłowe dane"); }
+            //    o(RegisterToInt(r1), RegisterToInt(r2));
+            //}
+
+
+
+            //static bool InputRejestr(string whatIsInput, out string a)
+            //{
+            //    Console.WriteLine("Podaj " + whatIsInput);
+            //    a = Console.ReadLine().ToUpper();
+            //    if (a.Length != 2) return false;
+            //    if (((int)a[0] >= 65 && (int)a[0] <= 68) && (a[1] == 'H' || a[1] == 'L'))
+            //        return true;
+            //    return false;
+            //}
         }
     }
 }
