@@ -18,6 +18,15 @@ namespace Intel8086
 
         public Procesor() { }
 
+        public Procesor(int seed)
+        {
+            Random random = new Random(seed);
+            for(int i = 0; i < register.Length; i++)
+            {
+                register[i] = random.Next(257);
+            }
+        }
+
         public Procesor(params string[] registers)
         {
             if (registers.Length != 8) throw new ArgumentException();

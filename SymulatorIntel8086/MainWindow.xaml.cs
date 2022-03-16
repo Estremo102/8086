@@ -64,5 +64,11 @@ namespace SymulatorIntel8086
             else
                 MessageBox.Show("Proszę wybrać operację oraz sektory");
         }
+
+        private void Random_Click(object sender, RoutedEventArgs e)
+        {
+            proc = new Procesor(Convert.ToInt32(DateTime.Now.Millisecond));
+            RegistersView.Text = "REJESTRY\n" + proc.ToString();
+        }
     }
 }
