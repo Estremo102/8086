@@ -4,15 +4,15 @@ namespace Intel8086
 {
     public class Procesor
     {
-        private int[] register = new int[8];
-        public string AH { get => ToHex(register[0]); private set => register[0] = ToDecimal(value); }
-        public string AL { get => ToHex(register[1]); private set => register[1] = ToDecimal(value); }
-        public string BH { get => ToHex(register[2]); private set => register[2] = ToDecimal(value); }
-        public string BL { get => ToHex(register[3]); private set => register[3] = ToDecimal(value); }
-        public string CH { get => ToHex(register[4]); private set => register[4] = ToDecimal(value); }
-        public string CL { get => ToHex(register[5]); private set => register[5] = ToDecimal(value); }
-        public string DH { get => ToHex(register[6]); private set => register[6] = ToDecimal(value); }
-        public string DL { get => ToHex(register[7]); private set => register[7] = ToDecimal(value); }
+        private byte[] register = new byte[8];
+        public string AH { get => ToHex(register[0]); private set => register[0] = (byte)ToDecimal(value); }
+        public string AL { get => ToHex(register[1]); private set => register[1] = (byte)ToDecimal(value); }
+        public string BH { get => ToHex(register[2]); private set => register[2] = (byte)ToDecimal(value); }
+        public string BL { get => ToHex(register[3]); private set => register[3] = (byte)ToDecimal(value); }
+        public string CH { get => ToHex(register[4]); private set => register[4] = (byte)ToDecimal(value); }
+        public string CL { get => ToHex(register[5]); private set => register[5] = (byte)ToDecimal(value); }
+        public string DH { get => ToHex(register[6]); private set => register[6] = (byte)ToDecimal(value); }
+        public string DL { get => ToHex(register[7]); private set => register[7] = (byte)ToDecimal(value); }
 
         delegate void Operation(int a, int b);
         delegate void OperationSR(int a);
@@ -24,7 +24,7 @@ namespace Intel8086
             Random random = new Random(seed);
             for (int i = 0; i < register.Length; i++)
             {
-                register[i] = random.Next(256);
+                register[i] = (byte)random.Next(256);
             }
         }
 
@@ -53,7 +53,7 @@ namespace Intel8086
         {
             data = data.ToUpper();
             if (data.Length != 2) return false;
-            if ((((int)data[0] >= 48 && (int)data[0] <= 57) || ((int)data[0] >= 65 && (int)data[0] <= 70)) && (((int)data[1] >= 48 && (int)data[1] <= 57) || ((int)data[1] >= 65 && (int)data[1] <= 70)))
+            if (((data[0] >= 48 && data[0] <= 57) || (data[0] >= 65 && data[0] <= 70)) && ((data[1] >= 48 && data[1] <= 57) || (data[1] >= 65 && data[1] <= 70)))
                 return true;
             return false;
         }
@@ -115,13 +115,13 @@ namespace Intel8086
         void MOV(int a, int b) => register[a] = register[b];
         void XCHG(int a, int b)
         {
-            int temp = register[a];
+            byte temp = register[a];
             register[a] = register[b];
             register[b] = temp;
         }
 
-        void INC(int a) => register[a] = (byte)++register[a];
-        void DEC(int a) => register[a] = (byte)--register[a];
+        void INC(int a) => register[a]++;
+        void DEC(int a) => register[a]--;
         void NOT(int a) => register[a] = (byte)~register[a];
 
         static int RegisterToInt(string r)
