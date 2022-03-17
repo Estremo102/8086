@@ -122,22 +122,22 @@ namespace Intel8086
 
         void INC(int a) => register[a] = (byte)++register[a];
         void DEC(int a) => register[a] = (byte)--register[a];
-        void NOT(int a) => register[a] = ~(byte)register[a];
+        void NOT(int a) => register[a] = (byte)~register[a];
 
         static int RegisterToInt(string r)
         {
-            switch (r)
+            return r switch
             {
-                case "AH": return 0;
-                case "AL": return 1;
-                case "BH": return 2;
-                case "BL": return 3;
-                case "CH": return 4;
-                case "CL": return 5;
-                case "DH": return 6;
-                case "DL": return 7;
-                default: return -1;
-            }
+                "AH" => 0,
+                "AL" => 1,
+                "BH" => 2,
+                "BL" => 3,
+                "CH" => 4,
+                "CL" => 5,
+                "DH" => 6,
+                "DL" => 7,
+                _ => -1,
+            };
         }
 
         public override string ToString() => $"AX: AH[{AH,2}] AL[{AL,2}]\n" +
