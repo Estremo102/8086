@@ -124,9 +124,8 @@ namespace Intel8086
         void DEC(int a) => register[a]--;
         void NOT(int a) => register[a] = (byte)~register[a];
 
-        static int RegisterToInt(string r)
-        {
-            return r switch
+        static int RegisterToInt(string r) => 
+            r switch
             {
                 "AH" => 0,
                 "AL" => 1,
@@ -138,7 +137,6 @@ namespace Intel8086
                 "DL" => 7,
                 _ => -1,
             };
-        }
 
         public override string ToString() => $"AX: AH[{AH,2}] AL[{AL,2}]\n" +
                                              $"BX: BH[{BH,2}] BL[{BL,2}]\n" +
