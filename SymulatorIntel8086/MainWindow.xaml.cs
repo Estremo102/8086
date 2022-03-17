@@ -85,7 +85,6 @@ namespace SymulatorIntel8086
         {
             string op = ChooseOperation.SelectedItem.ToString();
             return op == "INC" || op == "DEC" || op == "NOT" || op =="NEG";
-                
         }
     }
 }
