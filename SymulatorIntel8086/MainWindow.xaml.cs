@@ -24,6 +24,10 @@ namespace SymulatorIntel8086
             InitializeComponent();
             ChooseOperation.Items.Add("MOV");
             ChooseOperation.Items.Add("XCHG");
+            ChooseOperation.Items.Add("INC");
+            ChooseOperation.Items.Add("DEC");
+            ChooseOperation.Items.Add("NOT");
+            ChooseOperation.Items.Add("NEG");
             Register1.Items.Add("AH");
             Register1.Items.Add("AL");
             Register1.Items.Add("BH");
@@ -69,6 +73,20 @@ namespace SymulatorIntel8086
         {
             proc = new Procesor(Convert.ToInt32(DateTime.Now.Millisecond));
             RegistersView.Text = "REJESTRY\n" + proc.ToString();
+        }
+
+        private void ChooseOperation_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //Register2.IsEnabled = !ChoosenOperation();
+            if (ChoosenOperation()) Reg2.Visibility = Visibility.Hidden;
+            else Reg2.Visibility = Visibility.Visible;
+        }
+
+        bool ChoosenOperation()
+        {
+            string op = ChooseOperation.SelectedItem.ToString();
+            return op == "INC" || op == "DEC" || op == "NOT" || op =="NEG";
+                
         }
     }
 }

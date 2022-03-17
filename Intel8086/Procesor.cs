@@ -15,15 +15,16 @@ namespace Intel8086
         public string DL { get => ToHex(register[7]); private set => register[7] = ToDecimal(value); }
 
         delegate void Operation(int a, int b);
+        delegate void OperationSR(int a);
 
         public Procesor() { }
 
         public Procesor(int seed)
         {
             Random random = new Random(seed);
-            for(int i = 0; i < register.Length; i++)
+            for (int i = 0; i < register.Length; i++)
             {
-                register[i] = random.Next(257);
+                register[i] = random.Next(256);
             }
         }
 
@@ -69,22 +70,46 @@ namespace Intel8086
         {
             string[] a;
             a = input.ToUpper().Split(' ');
-            Operation o;
+            Operation o = null;
+            OperationSR osr = null;
             switch (a[0])
             {
                 case "MOV":
-                    o = new Operation(MOV);
+                    o = MOV;
                     break;
                 case "XCHG":
-                    o = new Operation(XCHG);
+                    o = XCHG;
+                    break;
+                case "INC":
+                    osr = INC;
+                    break;
+                case "DEC":
+                    osr = DEC;
+                    break;
+                case "NOT":
+                    osr = NOT;
+                    break;
+                case "NEG":
+                    osr = NOT;
+                    osr += INC;
                     break;
                 default:
                     return false;
             }
-            a = a[1].Split(',');
-            if (!CheckRegister(a[0]) || !CheckRegister(a[1])) return false;
-            o(RegisterToInt(a[0]), RegisterToInt(a[1]));
-            return true;
+            if (o == null)
+            {
+                a = a[1].Split(',');
+                if (!CheckRegister(a[0])) return false;
+                osr(RegisterToInt(a[0]));
+                return true;
+            }
+            else
+            {
+                a = a[1].Split(',');
+                if (!CheckRegister(a[0]) || !CheckRegister(a[1])) return false;
+                o(RegisterToInt(a[0]), RegisterToInt(a[1]));
+                return true;
+            }
         }
 
         void MOV(int a, int b) => register[a] = register[b];
@@ -94,6 +119,10 @@ namespace Intel8086
             register[a] = register[b];
             register[b] = temp;
         }
+
+        void INC(int a) => register[a] = (byte)++register[a];
+        void DEC(int a) => register[a] = (byte)--register[a];
+        void NOT(int a) => register[a] = ~(byte)register[a];
 
         static int RegisterToInt(string r)
         {
