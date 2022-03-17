@@ -77,7 +77,6 @@ namespace SymulatorIntel8086
 
         private void ChooseOperation_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //Register2.IsEnabled = !ChoosenOperation();
             if (ChoosenOperation()) Reg2.Visibility = Visibility.Hidden;
             else Reg2.Visibility = Visibility.Visible;
         }
