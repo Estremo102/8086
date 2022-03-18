@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SymulatorIntel8086"
         mc:Ignorable="d"
-        Title="Symulator Intel 8086" Height="450" Width="800" Background="#FFF7E2C4">
+        Title="Symulator Intel 8086" Height="450" Width="800" Background="#FFF7E2C4" Icon="/intel.ico" MinWidth="470" MinHeight="340">
     <Grid>
         <Label Content="AH" HorizontalAlignment="Left" Margin="24,32,0,0" VerticalAlignment="Top" Height="27" Width="33" FontFamily="Lucida Console" FontSize="18"/>
         <Label Content="AL" HorizontalAlignment="Left" Margin="95,32,0,0" VerticalAlignment="Top" Height="27" Width="29" FontFamily="Lucida Console" FontSize="18"/>
