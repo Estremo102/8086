@@ -93,6 +93,21 @@ namespace Intel8086
                     osr = NOT;
                     osr += INC;
                     break;
+                case "AND":
+                    o = AND;
+                        break;
+                case "OR":
+                    o = OR;
+                    break;
+                case "XOR":
+                    o = XOR;
+                    break;
+                case "ADD":
+                    o = ADD;
+                    break;
+                case "SUB":
+                    o = SUB;
+                    break;
                 default:
                     return false;
             }
@@ -123,6 +138,13 @@ namespace Intel8086
         void INC(int a) => register[a]++;
         void DEC(int a) => register[a]--;
         void NOT(int a) => register[a] = (byte)~register[a];
+
+        void AND(int a, int b) => register[a] = (byte)(register[a] & register[b]);
+
+        void OR(int a, int b) => register[a] = (byte)(register[a] | register[b]);
+        void XOR(int a, int b) => register[a] = (byte)(register[a] ^ register[b]);
+        void ADD(int a, int b) => register[a] += register[b];
+        void SUB(int a, int b) => register[a] -= register[b];
 
         static int RegisterToInt(string r) => 
             r switch

@@ -28,6 +28,11 @@ namespace SymulatorIntel8086
             ChooseOperation.Items.Add("DEC");
             ChooseOperation.Items.Add("NOT");
             ChooseOperation.Items.Add("NEG");
+            ChooseOperation.Items.Add("AND");
+            ChooseOperation.Items.Add("OR");
+            ChooseOperation.Items.Add("XOR");
+            ChooseOperation.Items.Add("ADD");
+            ChooseOperation.Items.Add("SUB");
             Register1.Items.Add("AH");
             Register1.Items.Add("AL");
             Register1.Items.Add("BH");
