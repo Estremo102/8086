@@ -19,6 +19,7 @@ namespace SymulatorIntel8086
     public partial class MainWindow : Window
     {
         Procesor proc;
+        Memory mem;
         public MainWindow()
         {
             InitializeComponent();
@@ -50,6 +51,7 @@ namespace SymulatorIntel8086
             Register2.Items.Add("DH");
             Register2.Items.Add("DL");
             proc = new Procesor();
+            mem = new Memory();
         }
 
         private void Insert_Click(object sender, RoutedEventArgs e)
@@ -58,10 +60,12 @@ namespace SymulatorIntel8086
             {
                 proc = new Procesor(AH.Text, AL.Text, BH.Text, BL.Text, CH.Text, CL.Text, DH.Text, DL.Text, SI.Text, DI.Text, BP.Text);
                 RefreshRegisters();
+                proc.memory = mem;
             }
             catch (ArgumentException)
             {
                 proc = new Procesor();
+                proc.memory = mem;
                 RefreshRegisters(false);
             }
         }
@@ -79,6 +83,7 @@ namespace SymulatorIntel8086
         private void Random_Click(object sender, RoutedEventArgs e)
         {
             proc = new Procesor(Convert.ToInt32(DateTime.Now.Millisecond));
+            proc.memory = mem;
             RefreshRegisters();
         }
 
@@ -119,6 +124,28 @@ namespace SymulatorIntel8086
                 RegistersView.Text = "BŁĘDNE DANE\n" + proc.ToString();
                 AddressRegistersView.Text = "BŁĘDNE DANE\n" + proc.AddressRegisters();
             }
+        }
+
+        private void RefreshMemory()
+        {
+            DataView.Text = mem.ToString();
+        }
+
+        private void InsertData_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void RandomData_Click(object sender, RoutedEventArgs e)
+        {
+            mem = new Memory(Convert.ToInt32(DateTime.Now.Millisecond));
+            proc.memory = mem;
+            //RefreshMemory();
+        }
+
+        private void ShowData_Click(object sender, RoutedEventArgs e)
+        {
+            DataViewSingle.Text = "PAMIĘĆ\n" + mem.DisplayData(DataAddress.Text);
         }
     }
 }

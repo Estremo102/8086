@@ -1,7 +1,96 @@
 ﻿using System;
+using System.Text;
 
 namespace Intel8086
 {
+    public class Memory
+    {
+        public byte[] data = new byte[65536];
+        public Memory(int seed)
+        {
+            Random random = new Random(seed);
+            for (int i = 0; i < data.Length; i++)
+                data[i] = (byte)random.Next(256);
+        }
+        public Memory() { }
+
+        public static bool CheckAddress(string address)
+        {
+            if (address[0] != '[' || address[address.Length - 1] != ']') return false;
+            address = address.Substring(1, address.Length - 2);
+            string[] tmp = address.Split('+');
+            if (tmp.Length > 3) return false;
+            bool a = false;
+            bool b = false;
+            bool c = false;
+            foreach (string s in tmp)
+            {
+                try
+                {
+                    if (s.Length == 4 && !a)
+                    {
+                        Convert.ToInt32(s, 16);
+                        a = true;
+                    }
+                    else throw new Exception();
+                }
+                catch
+                {
+                    if ((s == "SI" || s == "DI") && !c)
+                    {
+                        c = true;
+                        continue;
+                    }
+                    if ((s == "BP" || s == "BX") && !b)
+                    {
+                        b = true;
+                        continue;
+                    }
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public static int StringToAddress(string address, Procesor p)
+        {
+            address = address.Substring(1, address.Length - 2);
+            string[] tmp = address.Split('+');
+            ushort adr = 0;
+            foreach (string s in tmp)
+            {
+                switch (s)
+                {
+                    case "SI":
+                        adr += (ushort)Procesor.ToDecimal(p.SI);
+                        break;
+                    case "DI":
+                        adr += (ushort)Procesor.ToDecimal(p.DI);
+                        break;
+                    case "BP":
+                        adr += (ushort)Procesor.ToDecimal(p.BP);
+                        break;
+                    case "BX":
+                        adr += (ushort)Procesor.ToDecimal(p.BX);
+                        break;
+                    default:
+                        adr += (ushort)Procesor.ToDecimal(s);
+                        break;
+                }
+            }
+            return adr;
+        }
+
+        public string DisplayData(string s) => (Convert.ToInt32(s, 16).ToString("x4") + " " + data[Convert.ToInt32(s, 16)].ToString("x2")).ToUpper();
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < data.Length; i++)
+                sb.AppendLine($"{i.ToString("x4").ToUpper()} {data[i].ToString("x2").ToUpper()}");
+            return sb.ToString();
+        }
+    }
     public class Procesor
     {
         private byte[] register = new byte[8];
@@ -19,9 +108,13 @@ namespace Intel8086
         public string BP { get => ToHex(addressRegister[2]); private set => addressRegister[2] = (ushort)ToDecimal(value); }
         public string BX { get => ToHex(register[2]) + ToHex(register[3]); }
 
+        public Memory memory { get; set; } = new Memory();
 
         delegate void Operation(int a, int b);
+        delegate void OperationDR(string a, int b);
+        delegate void OperationRD(int a, string b);
         delegate void OperationSR(int a);
+        delegate void OperationSRD(string a);
 
         public Procesor() { }
 
@@ -30,7 +123,7 @@ namespace Intel8086
             Random random = new Random(seed);
             for (int i = 0; i < register.Length; i++)
                 register[i] = (byte)random.Next(256);
-            for(int i = 0; i < addressRegister.Length; i++)
+            for (int i = 0; i < addressRegister.Length; i++)
                 addressRegister[i] = (ushort)random.Next(65536);
         }
 
@@ -46,7 +139,7 @@ namespace Intel8086
             CL = registers[5];
             DH = registers[6];
             DL = registers[7];
-            if(registers.Length == 11)
+            if (registers.Length == 11)
             {
                 SI = registers[8];
                 DI = registers[9];
@@ -56,7 +149,7 @@ namespace Intel8086
 
         public static string ToHex(byte x) => x.ToString("x2").ToUpper();
         public static string ToHex(ushort x) => x.ToString("x4").ToUpper();
-        
+
         public static int ToDecimal(string x) => Convert.ToInt32(x, 16);
 
         bool CheckData(string data)
@@ -99,42 +192,64 @@ namespace Intel8086
             string[] a;
             a = input.ToUpper().Split(' ');
             Operation o = null;
+            OperationDR odr = null;
+            OperationRD ord = null;
             OperationSR osr = null;
+            OperationSRD osrD = null;
             switch (a[0])
             {
                 case "MOV":
                     o = MOV;
+                    odr = MOV;
+                    ord = MOV;
                     break;
                 case "XCHG":
                     o = XCHG;
+                    ord = XCHG;
+                    odr = XCHG;
                     break;
                 case "INC":
                     osr = INC;
+                    osrD = INC;
                     break;
                 case "DEC":
                     osr = DEC;
+                    osrD = DEC;
                     break;
                 case "NOT":
                     osr = NOT;
+                    osrD = NOT;
                     break;
                 case "NEG":
                     osr = NOT;
                     osr += INC;
+                    osrD = NOT;
+                    osrD += INC;
                     break;
                 case "AND":
                     o = AND;
-                        break;
+                    ord = AND;
+                    odr = AND;
+                    break;
                 case "OR":
                     o = OR;
+                    ord = OR;
+                    odr = OR;
                     break;
                 case "XOR":
                     o = XOR;
+                    ord = XOR;
+                    odr = XOR;
                     break;
                 case "ADD":
                     o = ADD;
+                    ord = ADD;
+                    odr = ADD;
                     break;
                 case "SUB":
                     o = SUB;
+                    ord = SUB;
+                    odr = SUB;
                     break;
                 default:
                     return false;
@@ -142,14 +257,32 @@ namespace Intel8086
             if (o == null)
             {
                 a = a[1].Split(',');
-                if (!CheckRegister(a[0])) return false;
+                if (!CheckRegister(a[0]))
+                {
+                    if (!Memory.CheckAddress(a[0])) return false;
+                    osrD(a[0]);
+                    return true;
+                }
                 osr(RegisterToInt(a[0]));
                 return true;
             }
             else
             {
                 a = a[1].Split(',');
-                if (!CheckRegister(a[0]) || !CheckRegister(a[1])) return false;
+                if (!CheckRegister(a[0]) || !CheckRegister(a[1]))
+                {
+                    if (CheckRegister(a[0]) && Memory.CheckAddress(a[1]))
+                    {
+                        ord(RegisterToInt(a[0]), a[1]);
+                        return true;
+                    }
+                    if (Memory.CheckAddress(a[0]) && CheckRegister(a[1]))
+                    {
+                        odr(a[0], RegisterToInt(a[1]));
+                        return true;
+                    }
+                    return false;
+                }
                 o(RegisterToInt(a[0]), RegisterToInt(a[1]));
                 return true;
             }
@@ -162,7 +295,6 @@ namespace Intel8086
             register[a] = register[b];
             register[b] = temp;
         }
-
         void INC(int a) => register[a]++;
         void DEC(int a) => register[a]--;
         void NOT(int a) => register[a] = (byte)~register[a];
@@ -172,7 +304,37 @@ namespace Intel8086
         void ADD(int a, int b) => register[a] += register[b];
         void SUB(int a, int b) => register[a] -= register[b];
 
-        static int RegisterToInt(string r) => 
+
+        void INC(string a) => memory.data[Memory.StringToAddress(a, this)]++;
+        void DEC(string a) => memory.data[Memory.StringToAddress(a, this)]--;
+        void NOT(string a) => memory.data[Memory.StringToAddress(a, this)] = (byte)~memory.data[Memory.StringToAddress(a, this)];
+
+        void MOV(int a, string b) => register[a] = memory.data[Memory.StringToAddress(b, this)];
+        void XCHG(int a, string b)
+        {
+            byte temp = register[a];
+            register[a] = memory.data[Memory.StringToAddress(b, this)];
+            memory.data[Memory.StringToAddress(b, this)] = temp;
+        }
+        void AND(int a, string b) => register[a] = (byte)(register[a] & memory.data[Memory.StringToAddress(b, this)]);
+        void OR(int a, string b) => register[a] = (byte)(register[a] | memory.data[Memory.StringToAddress(b, this)]);
+        void XOR(int a, string b) => register[a] = (byte)(register[a] ^ memory.data[Memory.StringToAddress(b, this)]);
+        void ADD(int a, string b) => register[a] += memory.data[Memory.StringToAddress(b, this)];
+        void SUB(int a, string b) => register[a] -= memory.data[Memory.StringToAddress(b, this)];
+        void MOV(string a, int b) => memory.data[Memory.StringToAddress(a, this)] = register[b];
+        void XCHG(string a, int b)
+        {
+            byte temp = memory.data[Memory.StringToAddress(a, this)];
+            memory.data[Memory.StringToAddress(a, this)] = register[b];
+            register[b] = temp;
+        }
+        void AND(string a, int b) => memory.data[Memory.StringToAddress(a, this)] = Convert.ToByte(memory.data[Memory.StringToAddress(a, this)] & register[b]);
+        void OR(string a, int b) => memory.data[Memory.StringToAddress(a, this)] = Convert.ToByte(memory.data[Memory.StringToAddress(a, this)] | register[b]);
+        void XOR(string a, int b) => memory.data[Memory.StringToAddress(a, this)] = Convert.ToByte(memory.data[Memory.StringToAddress(a, this)] ^ register[b]);
+        void ADD(string a, int b) => memory.data[Memory.StringToAddress(a, this)] += register[b];
+        void SUB(string a, int b) => memory.data[Memory.StringToAddress(a, this)] -= register[b];
+
+        static int RegisterToInt(string r) =>
             r switch
             {
                 "AH" => 0,

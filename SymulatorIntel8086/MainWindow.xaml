@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SymulatorIntel8086"
         mc:Ignorable="d"
-        Title="Symulator Intel 8086" Height="509" Width="853" Background="#FFF7E2C4" Icon="/intel.ico" MinWidth="470" MinHeight="340">
+        Title="Symulator Intel 8086" Height="542" Width="892" Background="#FFF7E2C4" Icon="/intel.ico" MinWidth="470" MinHeight="340">
     <Grid>
         <Label Content="AH" HorizontalAlignment="Left" Margin="24,32,0,0" VerticalAlignment="Top" Height="27" Width="33" FontFamily="Lucida Console" FontSize="18"/>
         <Label Content="AL" HorizontalAlignment="Left" Margin="95,32,0,0" VerticalAlignment="Top" Height="27" Width="29" FontFamily="Lucida Console" FontSize="18"/>
@@ -42,8 +42,15 @@
         <Label Content="SI" HorizontalAlignment="Left" Margin="57,147,0,0" VerticalAlignment="Top" Height="27" Width="34" FontFamily="Lucida Console" FontSize="18"/>
         <Label Content="DI" HorizontalAlignment="Left" Margin="57,175,0,0" VerticalAlignment="Top" Height="26" Width="34" FontFamily="Lucida Console" FontSize="18"/>
         <Label Content="BP" HorizontalAlignment="Left" Margin="57,202,0,0" VerticalAlignment="Top" Height="26" Width="34" FontFamily="Lucida Console" FontSize="18"/>
-        <TextBox x:Name="AssemblerBox" HorizontalAlignment="Left" Margin="443,177,0,0" TextWrapping="Wrap" Width="147" FontFamily="Lucida Console" FontSize="20" FontWeight="Normal" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Height="252" VerticalAlignment="Top" AcceptsReturn="True"/>
-        <Button x:Name="ExecuteAssembler" Content="Wykonaj" HorizontalAlignment="Left" Margin="526,434,0,0" VerticalAlignment="Top" Height="25" Width="64" Click="ExecuteAssembler_Click"/>
-
+        <TextBox x:Name="AssemblerBox" HorizontalAlignment="Left" Margin="443,177,0,0" TextWrapping="Wrap" Width="270" FontFamily="Lucida Console" FontSize="20" FontWeight="Normal" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Height="276" VerticalAlignment="Top" AcceptsReturn="True"/>
+        <Button x:Name="ExecuteAssembler" Content="Wykonaj" HorizontalAlignment="Left" Margin="649,460,0,0" VerticalAlignment="Top" Height="25" Width="64" Click="ExecuteAssembler_Click"/>
+        <ScrollViewer Margin="729,32,0,0" Height="421" VerticalAlignment="Top" HorizontalAlignment="Left" Width="133" Visibility="Hidden">
+            <TextBlock x:Name="DataView" Margin="0,0,0,0" TextWrapping="Wrap" Width="127" FontSize="24" FontFamily="Lucida Console" Background="#FFE6CBA5" Padding="10,10,10,10" Text=""/>
+        </ScrollViewer>
+        <Button x:Name="InsertData" Content="Wczytaj" HorizontalAlignment="Left" Margin="800,144,0,0" VerticalAlignment="Top" Width="64" Click="InsertData_Click" Height="22"/>
+        <Button x:Name="RandomData" Content="Losuj" HorizontalAlignment="Left" Margin="734,144,0,0" VerticalAlignment="Top" Width="62" Click="RandomData_Click" Height="22"/>
+        <TextBlock x:Name="DataViewSingle" HorizontalAlignment="Left" Margin="729,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="68" Width="141" FontSize="24" FontFamily="Lucida Console" Background="#FFE6CBA5" Padding="10,10,10,10"><Run Text="PAMI"/><Run Language="pl-pl" Text="ĘĆ"/><LineBreak/><Run Language="pl-pl" Text="0000 00"/></TextBlock>
+        <TextBox x:Name="DataAddress" HorizontalAlignment="Left" Margin="802,115,0,0" Text="0000" TextWrapping="Wrap" Width="62" FontFamily="Lucida Console" FontSize="20" FontWeight="Normal" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MaxLength="4" Height="24" VerticalAlignment="Top"/>
+        <Button x:Name="ShowData" Content="Odczytaj" HorizontalAlignment="Left" Margin="733,116,0,0" VerticalAlignment="Top" Width="64" Click="ShowData_Click" Height="22"/>
     </Grid>
 </Window>
