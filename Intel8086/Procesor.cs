@@ -29,15 +29,15 @@ namespace Intel8086
         {
             Random random = new Random(seed);
             for (int i = 0; i < register.Length; i++)
-            {
                 register[i] = (byte)random.Next(256);
-            }
+            for(int i = 0; i < addressRegister.Length; i++)
+                addressRegister[i] = (ushort)random.Next(65536);
         }
 
         public Procesor(params string[] registers)
         {
-            if (registers.Length != 8 && register.Length != 11) throw new ArgumentException();
-            foreach (var register in registers) if (!CheckData(register)) throw new ArgumentException(); // do poprawy
+            if (registers.Length != 8 && registers.Length != 11) throw new ArgumentException();
+            foreach (var register in registers) if (!CheckData(register)) throw new ArgumentException();
             AH = registers[0];
             AL = registers[1];
             BH = registers[2];
@@ -61,11 +61,29 @@ namespace Intel8086
 
         bool CheckData(string data)
         {
-            data = data.ToUpper();
-            if (data.Length != 2 && data.Length != 4) return false;
-            if (((data[0] >= 48 && data[0] <= 57) || (data[0] >= 65 && data[0] <= 70)) && ((data[1] >= 48 && data[1] <= 57) || (data[1] >= 65 && data[1] <= 70)))
+            try
+            {
+                Convert.ToInt32(data, 16);
                 return true;
-            return false;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        bool CheckData(string data, int length)
+        {
+            if (data.Length != length) return false;
+            try
+            {
+                Convert.ToInt32(data, 16);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         static bool CheckRegister(string check)

@@ -56,7 +56,7 @@ namespace SymulatorIntel8086
         {
             try
             {
-                proc = new Procesor(AH.Text, AL.Text, BH.Text, BL.Text, CH.Text, CL.Text, DH.Text, DL.Text /*, SI.Text, DI.Text, BP.Text*/);
+                proc = new Procesor(AH.Text, AL.Text, BH.Text, BL.Text, CH.Text, CL.Text, DH.Text, DL.Text, SI.Text, DI.Text, BP.Text);
                 RegistersView.Text = "REJESTRY\n" + proc.ToString();
                 AddressRegistersView.Text = "REJESTRY ADRESOWE\n" + proc.AddressRegisters();
             }
@@ -64,7 +64,7 @@ namespace SymulatorIntel8086
             {
                 proc = new Procesor();
                 RegistersView.Text = "BŁĘDNE DANE\n" + proc.ToString();
-                AddressRegistersView.Text = "REJESTRY ADRESOWE\n" + proc.AddressRegisters();
+                AddressRegistersView.Text = "BŁĘDNE DANE\n" + proc.AddressRegisters();
             }
         }
 

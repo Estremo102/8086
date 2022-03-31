@@ -36,12 +36,12 @@
         </Grid>
         <Button x:Name="Execute" Content="Symuluj" HorizontalAlignment="Left" Margin="24,351,0,0" VerticalAlignment="Top" Height="25" Width="64" Click="Execute_Click"/>
         <Button x:Name="Random" Content="Losuj" HorizontalAlignment="Left" Margin="32,235,0,0" VerticalAlignment="Top" Width="62" Click="Random_Click" Height="22"/>
-        <TextBox x:Name="SI" HorizontalAlignment="Left" Margin="94,148,0,0" Text="0000" TextWrapping="Wrap" VerticalAlignment="Top" Width="62" Height="24" FontFamily="Lucida Console" FontSize="20" FontWeight="Normal" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MaxLength="4"/>
-        <TextBox x:Name="DI" HorizontalAlignment="Left" Margin="94,177,0,0" Text="0000" TextWrapping="Wrap" VerticalAlignment="Top" Width="62" Height="24" FontFamily="Lucida Console" FontSize="20" FontWeight="Normal" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MaxLength="4"/>
-        <TextBox x:Name="BP" HorizontalAlignment="Left" Margin="94,205,0,0" Text="0000" TextWrapping="Wrap" VerticalAlignment="Top" Width="62" Height="24" FontFamily="Lucida Console" FontSize="20" FontWeight="Normal" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MaxLength="4"/>
-        <Label Content="SI" HorizontalAlignment="Left" Margin="55,147,0,0" VerticalAlignment="Top" Height="27" Width="34" FontFamily="Lucida Console" FontSize="18"/>
-        <Label Content="DI" HorizontalAlignment="Left" Margin="55,175,0,0" VerticalAlignment="Top" Height="26" Width="34" FontFamily="Lucida Console" FontSize="18"/>
-        <Label Content="BP" HorizontalAlignment="Left" Margin="55,203,0,0" VerticalAlignment="Top" Height="26" Width="34" FontFamily="Lucida Console" FontSize="18"/>
+        <TextBox x:Name="SI" HorizontalAlignment="Left" Margin="96,148,0,0" Text="0000" TextWrapping="Wrap" VerticalAlignment="Top" Width="62" Height="24" FontFamily="Lucida Console" FontSize="20" FontWeight="Normal" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MaxLength="4"/>
+        <TextBox x:Name="DI" HorizontalAlignment="Left" Margin="96,176,0,0" Text="0000" TextWrapping="Wrap" VerticalAlignment="Top" Width="62" Height="24" FontFamily="Lucida Console" FontSize="20" FontWeight="Normal" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MaxLength="4"/>
+        <TextBox x:Name="BP" HorizontalAlignment="Left" Margin="96,205,0,0" Text="0000" TextWrapping="Wrap" Width="62" FontFamily="Lucida Console" FontSize="20" FontWeight="Normal" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MaxLength="4" Height="24" VerticalAlignment="Top"/>
+        <Label Content="SI" HorizontalAlignment="Left" Margin="57,147,0,0" VerticalAlignment="Top" Height="27" Width="34" FontFamily="Lucida Console" FontSize="18"/>
+        <Label Content="DI" HorizontalAlignment="Left" Margin="57,175,0,0" VerticalAlignment="Top" Height="26" Width="34" FontFamily="Lucida Console" FontSize="18"/>
+        <Label Content="BP" HorizontalAlignment="Left" Margin="57,202,0,0" VerticalAlignment="Top" Height="26" Width="34" FontFamily="Lucida Console" FontSize="18"/>
 
     </Grid>
 </Window>
