@@ -57,14 +57,12 @@ namespace SymulatorIntel8086
             try
             {
                 proc = new Procesor(AH.Text, AL.Text, BH.Text, BL.Text, CH.Text, CL.Text, DH.Text, DL.Text, SI.Text, DI.Text, BP.Text);
-                RegistersView.Text = "REJESTRY\n" + proc.ToString();
-                AddressRegistersView.Text = "REJESTRY ADRESOWE\n" + proc.AddressRegisters();
+                RefreshRegisters();
             }
             catch (ArgumentException)
             {
                 proc = new Procesor();
-                RegistersView.Text = "BŁĘDNE DANE\n" + proc.ToString();
-                AddressRegistersView.Text = "BŁĘDNE DANE\n" + proc.AddressRegisters();
+                RefreshRegisters(false);
             }
         }
 
@@ -72,8 +70,7 @@ namespace SymulatorIntel8086
         {
             if (proc.ExecuteOperation($"{ChooseOperation.SelectedItem} {Register1.SelectedItem},{Register2.SelectedItem}"))
             {
-                RegistersView.Text = "REJESTRY\n" + proc.ToString();
-                AddressRegistersView.Text = "REJESTRY ADRESOWE\n" + proc.AddressRegisters();
+                RefreshRegisters();
             }
             else
                 MessageBox.Show("Proszę wybrać operację oraz sektory");
@@ -82,8 +79,7 @@ namespace SymulatorIntel8086
         private void Random_Click(object sender, RoutedEventArgs e)
         {
             proc = new Procesor(Convert.ToInt32(DateTime.Now.Millisecond));
-            RegistersView.Text = "REJESTRY\n" + proc.ToString();
-            AddressRegistersView.Text = "REJESTRY ADRESOWE\n" + proc.AddressRegisters();
+            RefreshRegisters();
         }
 
         private void ChooseOperation_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -95,7 +91,34 @@ namespace SymulatorIntel8086
         bool ChoosenOperation()
         {
             string op = ChooseOperation.SelectedItem.ToString();
-            return op == "INC" || op == "DEC" || op == "NOT" || op =="NEG";
+            return op == "INC" || op == "DEC" || op == "NOT" || op == "NEG";
+        }
+
+        private void ExecuteAssembler_Click(object sender, RoutedEventArgs e)
+        {
+            string[] commands = AssemblerBox.Text.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
+            foreach (string cmd in commands)
+                if (!proc.ExecuteOperation(cmd))
+                {
+                    AssemblerBox.Text = "Napotkano błąd w:\n" + cmd + "\n\n" + AssemblerBox.Text;
+                    RefreshRegisters();
+                    return;
+                }
+            RefreshRegisters();
+        }
+
+        private void RefreshRegisters(bool success = true)
+        {
+            if (success)
+            {
+                RegistersView.Text = "REJESTRY\n" + proc.ToString();
+                AddressRegistersView.Text = "REJESTRY ADRESOWE\n" + proc.AddressRegisters();
+            }
+            else
+            {
+                RegistersView.Text = "BŁĘDNE DANE\n" + proc.ToString();
+                AddressRegistersView.Text = "BŁĘDNE DANE\n" + proc.AddressRegisters();
+            }
         }
     }
 }
