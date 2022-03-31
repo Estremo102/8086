@@ -52,5 +52,6 @@
         <TextBlock x:Name="DataViewSingle" HorizontalAlignment="Left" Margin="729,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="68" Width="141" FontSize="24" FontFamily="Lucida Console" Background="#FFE6CBA5" Padding="10,10,10,10"><Run Text="PAMI"/><Run Language="pl-pl" Text="ĘĆ"/><LineBreak/><Run Language="pl-pl" Text="0000 00"/></TextBlock>
         <TextBox x:Name="DataAddress" HorizontalAlignment="Left" Margin="802,115,0,0" Text="0000" TextWrapping="Wrap" Width="62" FontFamily="Lucida Console" FontSize="20" FontWeight="Normal" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MaxLength="4" Height="24" VerticalAlignment="Top"/>
         <Button x:Name="ShowData" Content="Odczytaj" HorizontalAlignment="Left" Margin="733,116,0,0" VerticalAlignment="Top" Width="64" Click="ShowData_Click" Height="22"/>
+        <Button x:Name="SaveData" Content="Zapisz" HorizontalAlignment="Left" Margin="801,171,0,0" VerticalAlignment="Top" Width="64" Click="SaveData_Click" Height="22"/>
     </Grid>
 </Window>

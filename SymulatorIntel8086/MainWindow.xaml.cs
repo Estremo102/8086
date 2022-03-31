@@ -131,11 +131,6 @@ namespace SymulatorIntel8086
             DataView.Text = mem.ToString();
         }
 
-        private void InsertData_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void RandomData_Click(object sender, RoutedEventArgs e)
         {
             mem = new Memory(Convert.ToInt32(DateTime.Now.Millisecond));
@@ -146,6 +141,16 @@ namespace SymulatorIntel8086
         private void ShowData_Click(object sender, RoutedEventArgs e)
         {
             DataViewSingle.Text = "PAMIĘĆ\n" + mem.DisplayData(DataAddress.Text);
+        }
+
+        private void InsertData_Click(object sender, RoutedEventArgs e)
+        {
+            mem.Load();
+        }
+
+        private void SaveData_Click(object sender, RoutedEventArgs e)
+        {
+            mem.Save();
         }
     }
 }
