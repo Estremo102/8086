@@ -84,7 +84,7 @@ namespace Intel8086
 
         public void Save()
         {
-            using (BinaryWriter w = new BinaryWriter(File.Create("data.txt")))
+            using (BinaryWriter w = new BinaryWriter(File.Create("data.8086")))
             {
                 w.Write(data);
             }
@@ -92,7 +92,7 @@ namespace Intel8086
 
         public void Load()
         {
-            using (BinaryReader r = new BinaryReader(File.OpenRead("data.txt")))
+            using (BinaryReader r = new BinaryReader(File.OpenRead("data.8086")))
             {
                 data = r.ReadBytes(data.Length);
             }
