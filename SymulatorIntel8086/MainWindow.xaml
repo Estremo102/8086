@@ -24,17 +24,24 @@
         <TextBox x:Name="DH" HorizontalAlignment="Left" Margin="56,117,0,0" Text="00" TextWrapping="Wrap" VerticalAlignment="Top" Width="31" Height="24" FontFamily="Lucida Console" FontSize="20" FontWeight="Normal" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MaxLength="2"/>
         <TextBox x:Name="DL" HorizontalAlignment="Left" Margin="126,117,0,0" Text="00" TextWrapping="Wrap" VerticalAlignment="Top" Width="31" Height="24" FontFamily="Lucida Console" FontSize="20" FontWeight="Normal" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MaxLength="2"/>
         <TextBlock x:Name="RegistersView" HorizontalAlignment="Left" Margin="168,32,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="138" Width="270" FontSize="24" FontFamily="Lucida Console" Background="#FFE6CBA5" Padding="10,10,10,10"><Run Text="REJESTRY"/><LineBreak/><Run Language="pl-pl" Text="AX: "/><Run Text="AH[00] AL[00]"/><LineBreak/><Run Language="pl-pl" Text="BX: "/><Run Text="BH[00] BL[00]"/><LineBreak/><Run Language="pl-pl" Text="CX: "/><Run Text="CH[00] CL[00]"/><LineBreak/><Run Language="pl-pl" Text="DX: "/><Run Text="DH[00] DL[00]"/></TextBlock>
-        <Button x:Name="Insert" Content="Wczytaj" HorizontalAlignment="Left" Margin="95,147,0,0" VerticalAlignment="Top" Width="63" Click="Insert_Click" Height="22"/>
-        <Label Content="Operacja" HorizontalAlignment="Left" Margin="24,199,0,0" VerticalAlignment="Top" Height="36" Width="111" FontFamily="Lucida Console" FontSize="18"/>
-        <ComboBox x:Name="ChooseOperation" HorizontalAlignment="Left" Margin="24,233,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="ChooseOperation_SelectionChanged"/>
-        <Label Content="Rejestr 1" HorizontalAlignment="Left" Margin="155,199,0,0" VerticalAlignment="Top" Height="36" Width="111" FontFamily="Lucida Console" FontSize="18"/>
-        <ComboBox x:Name="Register1" HorizontalAlignment="Left" Margin="155,233,0,0" VerticalAlignment="Top" Width="120"/>
-        <Grid x:Name="Reg2" Margin="287,196,0,0" HorizontalAlignment="Left" Width="126" Height="68" VerticalAlignment="Top">
+        <TextBlock x:Name="AddressRegistersView" HorizontalAlignment="Left" Margin="443,32,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="138" Width="270" FontSize="24" FontFamily="Lucida Console" Background="#FFE6CBA5" Padding="10,10,10,10"><Run Text="REJESTRY"/><Run Language="pl-pl" Text=" ADRESOWE"/><LineBreak/><Run Language="pl-pl" Text="SI"/><Run Text=": [0000]"/><LineBreak/><Run Language="pl-pl" Text="DI"/><Run Text=": [0000]"/><LineBreak/><Run Language="pl-pl" Text="BP"/><Run Text=": [0000]"/><LineBreak/><Run Language="pl-pl" Text="BX"/><Run Text=": [0000]"/></TextBlock>
+        <Button x:Name="Insert" Content="Wczytaj" HorizontalAlignment="Left" Margin="98,235,0,0" VerticalAlignment="Top" Width="64" Click="Insert_Click" Height="22"/>
+        <Label Content="Operacja" HorizontalAlignment="Left" Margin="24,282,0,0" VerticalAlignment="Top" Height="36" Width="111" FontFamily="Lucida Console" FontSize="18"/>
+        <ComboBox x:Name="ChooseOperation" HorizontalAlignment="Left" Margin="24,316,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="ChooseOperation_SelectionChanged"/>
+        <Label Content="Rejestr 1" HorizontalAlignment="Left" Margin="155,282,0,0" VerticalAlignment="Top" Height="36" Width="111" FontFamily="Lucida Console" FontSize="18"/>
+        <ComboBox x:Name="Register1" HorizontalAlignment="Left" Margin="155,316,0,0" VerticalAlignment="Top" Width="120"/>
+        <Grid x:Name="Reg2" Margin="287,279,0,0" HorizontalAlignment="Left" Width="126" Height="68" VerticalAlignment="Top">
             <Label Content="Rejestr 2" HorizontalAlignment="Left" Margin="0,3,0,0" VerticalAlignment="Top" Height="36" Width="111" FontFamily="Lucida Console" FontSize="18"/>
             <ComboBox x:Name="Register2" HorizontalAlignment="Left" Margin="0,37,0,0" VerticalAlignment="Top" Width="120"/>
         </Grid>
-        <Button x:Name="Execute" Content="Symuluj" HorizontalAlignment="Left" Margin="24,268,0,0" VerticalAlignment="Top" Height="25" Width="64" Click="Execute_Click"/>
-        <Button x:Name="Random" Content="Losuj" HorizontalAlignment="Left" Margin="28,147,0,0" VerticalAlignment="Top" Width="63" Click="Random_Click" Height="22"/>
+        <Button x:Name="Execute" Content="Symuluj" HorizontalAlignment="Left" Margin="24,351,0,0" VerticalAlignment="Top" Height="25" Width="64" Click="Execute_Click"/>
+        <Button x:Name="Random" Content="Losuj" HorizontalAlignment="Left" Margin="32,235,0,0" VerticalAlignment="Top" Width="62" Click="Random_Click" Height="22"/>
+        <TextBox x:Name="SI" HorizontalAlignment="Left" Margin="94,148,0,0" Text="0000" TextWrapping="Wrap" VerticalAlignment="Top" Width="62" Height="24" FontFamily="Lucida Console" FontSize="20" FontWeight="Normal" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MaxLength="4"/>
+        <TextBox x:Name="DI" HorizontalAlignment="Left" Margin="94,177,0,0" Text="0000" TextWrapping="Wrap" VerticalAlignment="Top" Width="62" Height="24" FontFamily="Lucida Console" FontSize="20" FontWeight="Normal" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MaxLength="4"/>
+        <TextBox x:Name="BP" HorizontalAlignment="Left" Margin="94,205,0,0" Text="0000" TextWrapping="Wrap" VerticalAlignment="Top" Width="62" Height="24" FontFamily="Lucida Console" FontSize="20" FontWeight="Normal" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MaxLength="4"/>
+        <Label Content="SI" HorizontalAlignment="Left" Margin="55,147,0,0" VerticalAlignment="Top" Height="27" Width="34" FontFamily="Lucida Console" FontSize="18"/>
+        <Label Content="DI" HorizontalAlignment="Left" Margin="55,175,0,0" VerticalAlignment="Top" Height="26" Width="34" FontFamily="Lucida Console" FontSize="18"/>
+        <Label Content="BP" HorizontalAlignment="Left" Margin="55,203,0,0" VerticalAlignment="Top" Height="26" Width="34" FontFamily="Lucida Console" FontSize="18"/>
 
     </Grid>
 </Window>

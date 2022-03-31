@@ -56,20 +56,25 @@ namespace SymulatorIntel8086
         {
             try
             {
-                proc = new Procesor(AH.Text, AL.Text, BH.Text, BL.Text, CH.Text, CL.Text, DH.Text, DL.Text);
+                proc = new Procesor(AH.Text, AL.Text, BH.Text, BL.Text, CH.Text, CL.Text, DH.Text, DL.Text /*, SI.Text, DI.Text, BP.Text*/);
                 RegistersView.Text = "REJESTRY\n" + proc.ToString();
+                AddressRegistersView.Text = "REJESTRY ADRESOWE\n" + proc.AddressRegisters();
             }
             catch (ArgumentException)
             {
                 proc = new Procesor();
                 RegistersView.Text = "BŁĘDNE DANE\n" + proc.ToString();
+                AddressRegistersView.Text = "REJESTRY ADRESOWE\n" + proc.AddressRegisters();
             }
         }
 
         private void Execute_Click(object sender, RoutedEventArgs e)
         {
             if (proc.ExecuteOperation($"{ChooseOperation.SelectedItem} {Register1.SelectedItem},{Register2.SelectedItem}"))
+            {
                 RegistersView.Text = "REJESTRY\n" + proc.ToString();
+                AddressRegistersView.Text = "REJESTRY ADRESOWE\n" + proc.AddressRegisters();
+            }
             else
                 MessageBox.Show("Proszę wybrać operację oraz sektory");
         }
@@ -78,6 +83,7 @@ namespace SymulatorIntel8086
         {
             proc = new Procesor(Convert.ToInt32(DateTime.Now.Millisecond));
             RegistersView.Text = "REJESTRY\n" + proc.ToString();
+            AddressRegistersView.Text = "REJESTRY ADRESOWE\n" + proc.AddressRegisters();
         }
 
         private void ChooseOperation_SelectionChanged(object sender, SelectionChangedEventArgs e)

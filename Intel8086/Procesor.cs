@@ -5,6 +5,7 @@ namespace Intel8086
     public class Procesor
     {
         private byte[] register = new byte[8];
+        private ushort[] addressRegister = new ushort[3];
         public string AH { get => ToHex(register[0]); private set => register[0] = (byte)ToDecimal(value); }
         public string AL { get => ToHex(register[1]); private set => register[1] = (byte)ToDecimal(value); }
         public string BH { get => ToHex(register[2]); private set => register[2] = (byte)ToDecimal(value); }
@@ -13,6 +14,11 @@ namespace Intel8086
         public string CL { get => ToHex(register[5]); private set => register[5] = (byte)ToDecimal(value); }
         public string DH { get => ToHex(register[6]); private set => register[6] = (byte)ToDecimal(value); }
         public string DL { get => ToHex(register[7]); private set => register[7] = (byte)ToDecimal(value); }
+        public string SI { get => ToHex(addressRegister[0]); private set => addressRegister[0] = (ushort)ToDecimal(value); }
+        public string DI { get => ToHex(addressRegister[1]); private set => addressRegister[1] = (ushort)ToDecimal(value); }
+        public string BP { get => ToHex(addressRegister[2]); private set => addressRegister[2] = (ushort)ToDecimal(value); }
+        public string BX { get => ToHex(register[2]) + ToHex(register[3]); }
+
 
         delegate void Operation(int a, int b);
         delegate void OperationSR(int a);
@@ -30,8 +36,8 @@ namespace Intel8086
 
         public Procesor(params string[] registers)
         {
-            if (registers.Length != 8) throw new ArgumentException();
-            foreach (var register in registers) if (!CheckData(register)) throw new ArgumentException();
+            if (registers.Length != 8 && register.Length != 11) throw new ArgumentException();
+            foreach (var register in registers) if (!CheckData(register)) throw new ArgumentException(); // do poprawy
             AH = registers[0];
             AL = registers[1];
             BH = registers[2];
@@ -40,19 +46,23 @@ namespace Intel8086
             CL = registers[5];
             DH = registers[6];
             DL = registers[7];
+            if(registers.Length == 11)
+            {
+                SI = registers[8];
+                DI = registers[9];
+                BP = registers[10];
+            }
         }
 
-        public static string ToHex(int x)
-        {
-            if (x < 16) return "0" + Convert.ToString(x, 16).ToUpper();
-            return Convert.ToString(x, 16).ToUpper();
-        }
+        public static string ToHex(byte x) => x.ToString("x2").ToUpper();
+        public static string ToHex(ushort x) => x.ToString("x4").ToUpper();
+        
         public static int ToDecimal(string x) => Convert.ToInt32(x, 16);
 
         bool CheckData(string data)
         {
             data = data.ToUpper();
-            if (data.Length != 2) return false;
+            if (data.Length != 2 && data.Length != 4) return false;
             if (((data[0] >= 48 && data[0] <= 57) || (data[0] >= 65 && data[0] <= 70)) && ((data[1] >= 48 && data[1] <= 57) || (data[1] >= 65 && data[1] <= 70)))
                 return true;
             return false;
@@ -157,6 +167,11 @@ namespace Intel8086
                 "DL" => 7,
                 _ => -1,
             };
+
+        public string AddressRegisters() => $"SI: [{SI}]\n" +
+                                            $"DI: [{DI}]\n" +
+                                            $"BP: [{BP}]\n" +
+                                            $"BX: [{BX}]";
 
         public override string ToString() => $"AX: AH[{AH,2}] AL[{AL,2}]\n" +
                                              $"BX: BH[{BH,2}] BL[{BL,2}]\n" +
