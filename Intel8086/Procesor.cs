@@ -63,7 +63,7 @@ namespace Intel8086
 
         public static int ToDecimal(string x) => Convert.ToInt32(x, 16);
 
-        bool CheckData(string data)
+        public static bool CheckData(string data)
         {
             try
             {
@@ -76,18 +76,10 @@ namespace Intel8086
             }
         }
 
-        bool CheckData(string data, int length)
+        public static bool CheckData(string data, int length)
         {
             if (data.Length != length) return false;
-            try
-            {
-                Convert.ToInt32(data, 16);
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            return CheckData(data);
         }
 
         static bool CheckRegister(string check)
@@ -219,7 +211,6 @@ namespace Intel8086
         void INC(string a) => memory.data[Memory.StringToAddress(a, this)]++;
         void DEC(string a) => memory.data[Memory.StringToAddress(a, this)]--;
         void NOT(string a) => memory.data[Memory.StringToAddress(a, this)] = (byte)~memory.data[Memory.StringToAddress(a, this)];
-
         void MOV(int a, string b) => register[a] = memory.data[Memory.StringToAddress(b, this)];
         void XCHG(int a, string b)
         {
