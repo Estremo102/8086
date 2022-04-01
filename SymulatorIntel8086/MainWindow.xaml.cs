@@ -52,6 +52,7 @@ namespace SymulatorIntel8086
             Register2.Items.Add("DL");
             proc = new Procesor();
             mem = new Memory();
+            proc.memory = mem;
         }
 
         private void Insert_Click(object sender, RoutedEventArgs e)
