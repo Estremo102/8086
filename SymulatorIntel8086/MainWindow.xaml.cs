@@ -163,7 +163,7 @@ namespace SymulatorIntel8086
             sfd.DefaultExt = ".8086";
             sfd.Filter = "intel 8086 data file|*.8086|plik tekstowy|*.txt";
             if (sfd.ShowDialog() == true)
-                    mem.Save(sfd.FileName);
+                mem.Save(sfd.FileName);
         }
     }
 }
