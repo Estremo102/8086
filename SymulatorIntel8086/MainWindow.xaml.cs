@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Intel8086;
+using Microsoft.Win32;
 
 namespace SymulatorIntel8086
 {
@@ -127,31 +128,42 @@ namespace SymulatorIntel8086
             }
         }
 
-        private void RefreshMemory()
-        {
-            DataView.Text = mem.ToString();
-        }
-
         private void RandomData_Click(object sender, RoutedEventArgs e)
         {
             mem = new Memory(Convert.ToInt32(DateTime.Now.Millisecond));
             proc.memory = mem;
-            //RefreshMemory();
         }
 
         private void ShowData_Click(object sender, RoutedEventArgs e)
         {
-            DataViewSingle.Text = "PAMIĘĆ\n" + mem.DisplayData(DataAddress.Text);
+            if (Procesor.CheckData(DataAddress.Text))
+                DataViewSingle.Text = "PAMIĘĆ\n" + mem.DisplayData(DataAddress.Text);
+            else
+                DataViewSingle.Text = "ZŁY ADRES";
         }
 
         private void InsertData_Click(object sender, RoutedEventArgs e)
         {
-            mem.Load();
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.FileName = "data";
+            ofd.DefaultExt = ".8086";
+            ofd.Filter = "intel 8086 data file|*.8086";
+            Nullable<bool> result = ofd.ShowDialog();
+            if (result == true)
+            {
+                string fn = ofd.FileName;
+                mem.Load(fn);
+            }
         }
 
         private void SaveData_Click(object sender, RoutedEventArgs e)
         {
-            mem.Save();
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.FileName = "data";
+            sfd.DefaultExt = ".8086";
+            sfd.Filter = "intel 8086 data file|*.8086|plik tekstowy|*.txt";
+            if (sfd.ShowDialog() == true)
+                    mem.Save(sfd.FileName);
         }
     }
 }

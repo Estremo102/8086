@@ -84,7 +84,20 @@ namespace Intel8086
 
         public void Save()
         {
-            using (BinaryWriter w = new BinaryWriter(File.Create("data.8086")))
+            Save("data.8086");
+        }
+        public void Save(string fileName)
+        {
+            string[] tmp = fileName.Split('.');
+            if(tmp[tmp.Length - 1] == "txt")
+            {
+                using (StreamWriter sw = new StreamWriter(fileName))
+                {
+                    sw.Write(this.ToString());
+                }
+                return;
+            }
+            using (BinaryWriter w = new BinaryWriter(File.Create(fileName)))
             {
                 w.Write(data);
             }
@@ -92,7 +105,11 @@ namespace Intel8086
 
         public void Load()
         {
-            using (BinaryReader r = new BinaryReader(File.OpenRead("data.8086")))
+            Load("data.8086");
+        }
+        public void Load(string fileName)
+        {
+            using (BinaryReader r = new BinaryReader(File.OpenRead(fileName)))
             {
                 data = r.ReadBytes(data.Length);
             }
