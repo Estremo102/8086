@@ -7,6 +7,7 @@
     <Authors>Dominik Możdżeń</Authors>
     <Product>Symulator Intel 8086</Product>
     <ApplicationIcon>intel.ico</ApplicationIcon>
+	  <_SuppressWpfTrimError>true</_SuppressWpfTrimError>
   </PropertyGroup>
 
   <ItemGroup>
