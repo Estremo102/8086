@@ -6,18 +6,11 @@
     <UseWPF>true</UseWPF>
     <Authors>Dominik Możdżeń</Authors>
     <Product>Symulator Intel 8086</Product>
-    <PackageIcon>intel.png</PackageIcon>
+    <ApplicationIcon>intel.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <Content Include="intel.ico" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="..\intel.png">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
   </ItemGroup>
 
   <ItemGroup>
