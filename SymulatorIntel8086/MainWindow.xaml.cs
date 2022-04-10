@@ -74,12 +74,19 @@ namespace SymulatorIntel8086
 
         private void Execute_Click(object sender, RoutedEventArgs e)
         {
-            if (proc.ExecuteOperation($"{ChooseOperation.SelectedItem} {Register1.SelectedItem},{Register2.SelectedItem}"))
+            try
             {
-                RefreshRegisters();
+                if (proc.ExecuteOperation($"{ChooseOperation.SelectedItem} {Register1.SelectedItem},{Register2.SelectedItem}"))
+                {
+                    RefreshRegisters();
+                }
+                else
+                    MessageBox.Show("Proszę wybrać operację oraz sektory");
             }
-            else
+            catch (Exception ex)
+            {
                 MessageBox.Show("Proszę wybrać operację oraz sektory");
+            }
         }
 
         private void Random_Click(object sender, RoutedEventArgs e)
@@ -108,8 +115,7 @@ namespace SymulatorIntel8086
                 if (!proc.ExecuteOperation(cmd))
                 {
                     AssemblerBox.Text = "Napotkano błąd w:\n" + cmd + "\n\n" + AssemblerBox.Text;
-                    RefreshRegisters();
-                    return;
+                    break;
                 }
             RefreshRegisters();
         }

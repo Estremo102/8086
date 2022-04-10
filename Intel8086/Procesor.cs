@@ -172,6 +172,7 @@ namespace Intel8086
             else
             {
                 a = a[1].Split(',');
+                if(a.Length != 2) return false;
                 if (!CheckRegister(a[0]) || !CheckRegister(a[1]))
                 {
                     if (CheckRegister(a[0]) && Memory.CheckAddress(a[1]))
